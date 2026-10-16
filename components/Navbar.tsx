@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
     setIsOpen(false);
   }, [location.pathname]);
 
-  const navLinks = [{name:'회사소개',path:'/about'},{name:'수리서비스',path:'/services'},{name:'지원기기',path:'/devices'},{name:'기업·기관',path:'/b2b'},{name:'이용후기',path:'/portfolio'},{name:'이용안내',path:'/locations'}];
+  const navLinks = [{name:'수리서비스',path:'/services'},{name:'매장안내',path:'/locations'},{name:'이용후기',path:'/portfolio'},{name:'기업·기관',path:'/b2b'},{name:'자주묻는질문',path:'/faq'},{name:'수리현황',path:'/status'}];
 
   const isActive = (path: string) => location.pathname === path;
   

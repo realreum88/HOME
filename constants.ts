@@ -15,7 +15,7 @@ import {SiteConfig} from './types';export const INITIAL_CONFIG:SiteConfig={
     {
       "id": "display",
       "title": "액정 수리",
-      "image": "/images/service-01-display.jpg",
+      "image": "images/service-01-display.jpg",
       "description": "화면 파손·터치 이상·화면 출력 문제를 확인합니다.",
       "icon": "ShieldCheck",
       "details": [
@@ -28,7 +28,7 @@ import {SiteConfig} from './types';export const INITIAL_CONFIG:SiteConfig={
     {
       "id": "battery",
       "title": "배터리 교체",
-      "image": "/images/service-02-battery.jpg",
+      "image": "images/service-02-battery.jpg",
       "description": "사용 시간 저하·갑작스러운 종료·배터리 상태를 점검합니다.",
       "icon": "ShieldCheck",
       "details": [
@@ -41,7 +41,7 @@ import {SiteConfig} from './types';export const INITIAL_CONFIG:SiteConfig={
     {
       "id": "logic",
       "title": "메인보드 수리",
-      "image": "/images/service-03-logic.jpg",
+      "image": "images/service-03-logic.jpg",
       "description": "전원 불량·부팅 이상 등 회로 관련 증상을 진단합니다.",
       "icon": "ShieldCheck",
       "details": [
@@ -54,7 +54,7 @@ import {SiteConfig} from './types';export const INITIAL_CONFIG:SiteConfig={
     {
       "id": "port",
       "title": "충전단자 수리",
-      "image": "/images/service-04-port.jpg",
+      "image": "images/service-04-port.jpg",
       "description": "충전 불량과 연결 이상, 단자의 손상 여부를 확인합니다.",
       "icon": "ShieldCheck",
       "details": [
@@ -67,7 +67,7 @@ import {SiteConfig} from './types';export const INITIAL_CONFIG:SiteConfig={
     {
       "id": "water",
       "title": "침수 진단·복원",
-      "image": "/images/service-05-water.jpg",
+      "image": "images/service-05-water.jpg",
       "description": "침수된 기기의 상태와 부식 범위를 확인합니다.",
       "icon": "ShieldCheck",
       "details": [
@@ -80,7 +80,7 @@ import {SiteConfig} from './types';export const INITIAL_CONFIG:SiteConfig={
     {
       "id": "storage",
       "title": "저장공간 상담",
-      "image": "/images/service-06-storage.jpg",
+      "image": "images/service-06-storage.jpg",
       "description": "모델별 저장공간 관련 작업 가능 여부를 확인합니다.",
       "icon": "ShieldCheck",
       "details": [

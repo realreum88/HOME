@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, Star, ShieldCheck, Clock, Sparkles, Quote, Rss, Calendar, Loader2, ArrowUpRight, Target, Compass, Heart, Zap, Shield, Trees, Home as LucideHome, Leaf, ShieldAlert, ChevronDown, HelpCircle, MousePointerClick } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Star, ShieldCheck, Clock, Sparkles, Quote, Rss, Calendar, Loader2, ArrowUpRight, Target, Compass, Heart, Zap, Shield, Trees, Home as LucideHome, Leaf, ShieldAlert, ChevronDown, HelpCircle, MousePointerClick, ClipboardCheck, Wrench, MapPin, Activity } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useSite } from '../context/SiteContext';
 
-const zelkovaHero = '/images/original-hero.jpg';
-const zelkovaMobileHero = '/images/original-hero.jpg';
+const zelkovaHero = 'images/original-hero.jpg';
+const zelkovaMobileHero = 'images/original-hero.jpg';
 const expertPhilosophyMobile = 'https://i.ibb.co/HLmZYq8S/image.png';
 const expertPhilosophyDesktop = 'https://i.ibb.co/pBCh5d2x/pc.png';
-const anxietyTopImage = '/images/lab-1.jpg';
+const anxietyTopImage = 'images/lab-1.jpg';
 
 
 
@@ -137,6 +137,7 @@ const Home: React.FC = () => {
 
     return (
     <div className="flex flex-col bg-light text-textMain">
+{/* 구조: 메인배너 → 퀵메뉴 → 수리 서비스 → 매장 안내 → 이용후기 → 기업·기관 → FAQ → 상담 배너 → 실시간 수리현황 */}
 <section id="top" className="relative min-h-[calc(100vh-6rem)] md:h-[90vh] flex flex-col justify-center items-center overflow-hidden bg-white">
         {/* Mobile Background Image (Absolute full-bleed background on mobile for vertical image) */}
         <div className="block md:hidden absolute inset-0 z-0">
@@ -205,6 +206,321 @@ const Home: React.FC = () => {
           </motion.div>
         </div>
       </section>
+<section id="quick" className="py-10 md:py-14 bg-white relative border-b border-slate-100"><div className="max-w-7xl mx-auto px-4 md:px-8"><div className="grid grid-cols-4 gap-3 sm:gap-6">{[{t:'이용후기',to:'/portfolio',I:Star},{t:'수리 상담',to:'/contact',I:ClipboardCheck},{t:'수리 서비스',to:'/services',I:Wrench},{t:'매장 안내',to:'/locations',I:MapPin}].map(({t,to,I})=><motion.div key={t} whileHover={{y:-6}}><Link to={to} className="p-4 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><I className="text-primary mb-3 md:mb-5" size={30}/><span className="text-[13px] md:text-xl font-extrabold text-slate-900 whitespace-nowrap">{t}</span></Link></motion.div>)}</div></div></section>
+<section id="services" className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-2 md:px-8 relative z-10">
+          <div className="text-center mb-10 md:mb-16">
+            <h3 className="text-2xl md:text-5xl font-extrabold text-slate-900 mb-3 sm:mb-4">전문적인 수리 솔루션</h3>
+            <p className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-bold text-xs sm:text-sm md:text-base shadow-sm hover:shadow-md transition-all">
+              <MousePointerClick className="w-4 h-4 sm:w-5 sm:h-5 text-primary animate-pulse" />
+              <span>아래 사진을 클릭하면 이동합니다</span>
+              <span className="inline-block animate-bounce text-base sm:text-lg">👇</span>
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+            {config.services.map((service, idx) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                whileHover={{ y: -6 }}
+                className="w-full h-full lg:max-w-[310px] lg:mx-auto"
+              >
+                <Link 
+                  to={`/services/${service.id}`}
+                  className="group relative overflow-hidden rounded-2xl bg-white border border-slate-200/80 shadow-md hover:shadow-2xl hover:border-primary/40 transition-all duration-300 flex flex-col h-full w-full"
+                >
+                  <div className="h-32 sm:h-48 lg:h-52 overflow-hidden relative">
+                    <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
+                  </div>
+                  <div className="p-4 sm:p-5 flex-1 flex items-center justify-center text-center">
+                    <h4 className="text-[17px] sm:text-[20px] md:text-[22px] lg:text-[23px] font-extrabold text-slate-900 group-hover:text-primary transition-colors break-keep">
+                      {service.title}
+                    </h4>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+<section id="locations" className="py-16 md:py-24 bg-surface relative"><div className="max-w-7xl mx-auto px-4 md:px-8"><div className="text-center mb-10 md:mb-16"><h2 className="text-[20px] sm:text-2xl md:text-4xl font-extrabold text-slate-900 mb-4 leading-tight break-keep">방문 · 접수 안내</h2><p className="text-slate-500 text-sm md:text-base">매장 주소와 연락처, 운영시간은 확정 후 안내됩니다.</p></div><div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">매장 위치</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">주소 안내 준비 중</p></motion.div><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">연락처</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">상담 채널 안내 준비 중</p></motion.div><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">운영시간</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">영업시간 안내 준비 중</p></motion.div><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">접수 전 준비</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">모델명 · 증상 · 데이터 백업</p></motion.div></div></div></section>
+<section id="reviews" className="py-16 md:py-24 bg-white relative border-t border-slate-100"><div className="max-w-7xl mx-auto px-4 md:px-8"><div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-10 md:mb-16"><h3 className="text-2xl md:text-5xl font-extrabold text-slate-900 tracking-tight">수리 이야기 · 이용후기</h3><p className="text-slate-500 mt-3 md:mt-5 leading-relaxed break-keep px-4">실제 수리 사례와 고객 후기는 준비되는 대로 안내하겠습니다.</p></div><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">{['액정 · 터치 점검','전원 · 충전 점검','침수 · 회로 진단'].map((t,i)=><motion.div key={t} whileHover={{y:-6}} className="group bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:border-primary/40 hover:shadow-xl transition-all duration-300 flex flex-col h-full"><div className="relative aspect-video w-full overflow-hidden bg-slate-100"><img src={['images/service-01-display.jpg','images/service-04-port.jpg','images/service-03-logic.jpg'][i]} alt={t+' 안내 이미지'} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/><span className="absolute top-3 left-3 bg-primary text-white text-xs font-black px-2 py-0.5 rounded">서비스 안내</span></div><div className="p-5"><h4 className="text-base md:text-lg font-bold text-slate-900 mb-2">{t}</h4><p className="text-slate-500 text-xs md:text-sm">모델과 증상에 따라 필요한 점검을 안내합니다.</p></div></motion.div>)}</div></div></section>
+<section id="b2b" className="py-16 md:py-24 bg-surface relative"><div className="max-w-7xl mx-auto px-4 md:px-8"><div className="text-center mb-10 md:mb-16"><h2 className="text-[20px] sm:text-2xl md:text-4xl font-extrabold text-slate-900 mb-4 leading-tight break-keep">기업 · 학교 · 기관의 기기도 함께</h2><p className="text-slate-500 text-sm md:text-base">여러 대의 기기는 모델, 수량, 증상과 희망 일정을 정리해주세요.</p></div><div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">기업 · 법인</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">업무용 기기 점검 상담</p></motion.div><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">학교 · 교육기관</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">학습용 기기 수리 상담</p></motion.div><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">다수 기기</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">기기별 증상과 수량 확인</p></motion.div><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">진행 일정</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">수리 범위와 소요 일정 협의</p></motion.div></div></div></section>
+<section id="faq" className="py-20 md:py-28 bg-gradient-to-br from-[#f1f5fa] via-[#fafbfd] to-[#edf2f8] relative overflow-hidden border-b border-slate-100/80">
+        {/* Premium subtle dot pattern overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(#0071e3_0.8px,transparent_0.8px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] opacity-[0.06] pointer-events-none" />
+        
+        {/* Soft eco-inspired backdrop highlights */}
+        <div className="absolute top-1/4 right-[-10%] w-[600px] h-[600px] bg-blue-400/12 rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute bottom-1/4 left-[-10%] w-[600px] h-[600px] bg-sky-400/12 rounded-full blur-[150px] pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-10 md:mb-14">
+            <h2 className="text-[18px] min-[360px]:text-[20px] min-[400px]:text-[22px] sm:text-[32px] md:text-[36.4px] font-black text-slate-900 mb-3.5 leading-tight tracking-tight whitespace-nowrap">
+              가장 많이 질문하시는 <span className="bg-gradient-to-r from-blue-600 via-sky-600 to-blue-500 bg-clip-text text-transparent underline decoration-blue-300 decoration-wavy underline-offset-8">안심 Q&A</span>
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base md:text-lg font-bold max-w-2xl mx-auto break-keep">
+              궁금한 점을 명쾌하게 해결해 드립니다.
+            </p>
+          </div>
+
+          {/* Mobile FAQ Dropdown Selector */}
+          <div className="block md:hidden relative mb-8 z-30">
+            <button
+              onClick={() => setFaqDropdownOpen(!faqDropdownOpen)}
+              className="w-full flex items-center justify-between bg-gradient-to-r from-blue-50 via-sky-50 to-blue-50/90 border-2 border-blue-500 rounded-2xl px-3.5 sm:px-5 py-3.5 text-sm font-extrabold text-slate-900 shadow-md shadow-blue-500/10 active:scale-[0.99] transition-all duration-200"
+            >
+              <span className="flex items-center gap-2 overflow-hidden">
+                <span className="relative flex h-3 w-3 shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-600"></span>
+                </span>
+                {activeFAQTab === 'all' ? (
+                  <span className="flex items-center gap-1.5 min-[380px]:gap-2 whitespace-nowrap overflow-hidden">
+                    <span className="bg-blue-600 text-white px-2.5 py-1 rounded-lg text-xs sm:text-sm font-black shadow-sm shrink-0">
+                      전체 보기
+                    </span>
+                    <span className="text-[11.5px] min-[360px]:text-xs min-[400px]:text-[13px] text-blue-950 font-extrabold tracking-tight whitespace-nowrap">
+                      (궁금하신 카테고리 선택)
+                    </span>
+                  </span>
+                ) : (
+                  <span className="bg-blue-600 text-white px-2.5 py-1 rounded-lg text-xs sm:text-sm font-black shadow-sm">
+                    {FAQ_DATA.find((cat) => cat.category === activeFAQTab)?.categoryName || ''}
+                  </span>
+                )}
+              </span>
+              <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm ml-1">
+                <ChevronDown
+                  className={`w-5 h-5 transition-transform duration-300 ${
+                    faqDropdownOpen ? 'rotate-180' : ''
+                  }`}
+                />
+              </div>
+            </button>
+
+            {faqDropdownOpen && (
+              <>
+                {/* Backdrop to close dropdown easily on clicking outside */}
+                <div
+                  className="fixed inset-0 z-20 cursor-default"
+                  onClick={() => setFaqDropdownOpen(false)}
+                />
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute left-0 right-0 mt-2 bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden z-30 py-1.5"
+                >
+                  <button
+                    onClick={() => {
+                      setActiveFAQTab('all');
+                      setOpenFAQIdx(null);
+                      setFaqDropdownOpen(false);
+                    }}
+                    className={`w-full text-left px-5 py-3.5 text-xs sm:text-sm font-bold transition-all duration-150 flex items-center justify-between ${
+                      activeFAQTab === 'all'
+                        ? 'bg-blue-50 text-[#005bb5] font-black'
+                        : 'text-slate-700 hover:bg-slate-50'
+                    }`}
+                  >
+                    <span>전체 보기</span>
+                    {activeFAQTab === 'all' && (
+                      <span className="w-2 h-2 rounded-full bg-blue-500" />
+                    )}
+                  </button>
+                  {FAQ_DATA.map((cat) => (
+                    <button
+                      key={cat.category}
+                      onClick={() => {
+                        setActiveFAQTab(cat.category);
+                        setOpenFAQIdx(null);
+                        setFaqDropdownOpen(false);
+                      }}
+                      className={`w-full text-left px-5 py-3.5 text-xs sm:text-sm font-bold transition-all duration-150 flex items-center justify-between ${
+                        activeFAQTab === cat.category
+                          ? 'bg-blue-50 text-[#005bb5] font-black'
+                          : 'text-slate-700 hover:bg-slate-50'
+                      }`}
+                    >
+                      <span>{cat.categoryName}</span>
+                      {activeFAQTab === cat.category && (
+                        <span className="w-2 h-2 rounded-full bg-blue-500" />
+                      )}
+                    </button>
+                  ))}
+                </motion.div>
+              </>
+            )}
+          </div>
+
+          {/* Desktop Category Navigation Bar (Single Line Segmented Control) */}
+          <div className="hidden md:flex items-center justify-center mb-10">
+            <div className="inline-flex items-center p-1.5 bg-slate-100/90 backdrop-blur-md border border-slate-200/90 rounded-full shadow-inner max-w-full overflow-x-auto scrollbar-none gap-1">
+              <button
+                onClick={() => {
+                  setActiveFAQTab('all');
+                  setOpenFAQIdx(null);
+                }}
+                className={`whitespace-nowrap flex-shrink-0 px-4 py-2.5 rounded-full text-xs lg:text-sm font-black transition-all duration-200 cursor-pointer ${
+                  activeFAQTab === 'all'
+                    ? 'bg-gradient-to-r from-[#005bb5] to-[#0071e3] text-white shadow-md shadow-blue-600/25 scale-[1.02]'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
+                }`}
+              >
+                전체 보기
+              </button>
+              {FAQ_DATA.map((cat) => (
+                <button
+                  key={cat.category}
+                  onClick={() => {
+                    setActiveFAQTab(cat.category);
+                    setOpenFAQIdx(null);
+                  }}
+                  className={`whitespace-nowrap flex-shrink-0 px-4 py-2.5 rounded-full text-xs lg:text-sm font-extrabold transition-all duration-200 cursor-pointer ${
+                    activeFAQTab === cat.category
+                      ? 'bg-gradient-to-r from-[#005bb5] to-[#0071e3] text-white shadow-md shadow-blue-600/25 font-black scale-[1.02]'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
+                  }`}
+                >
+                  {cat.categoryName}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Interactive FAQ Accordion List */}
+          <div className="space-y-4 max-w-3xl mx-auto">
+            {FAQ_DATA.filter(cat => activeFAQTab === 'all' || cat.category === activeFAQTab)
+              .flatMap((cat) => cat.qas.map((qa, index) => {
+                const uniqueKey = `${cat.category}-${index}`;
+                const isOpen = openFAQIdx === uniqueKey;
+
+                return (
+                  <div
+                    key={uniqueKey}
+                    className={`bg-white border rounded-2xl md:rounded-3xl transition-all duration-300 overflow-hidden ${
+                      isOpen
+                        ? 'border-blue-500 ring-2 ring-blue-500/20 shadow-xl shadow-blue-500/5'
+                        : 'border-slate-200/90 hover:border-blue-300 hover:shadow-md'
+                    }`}
+                  >
+                    {/* Header / Question Trigger */}
+                    <button
+                      onClick={() => setOpenFAQIdx(isOpen ? null : uniqueKey)}
+                      className="w-full text-left p-5 sm:p-6 md:p-7 flex items-center justify-between gap-4 cursor-pointer group"
+                    >
+                      <div className="flex gap-3 sm:gap-4 items-center flex-1">
+                        <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center shrink-0 font-black text-sm sm:text-base transition-colors ${
+                          isOpen ? 'bg-[#005bb5] text-white shadow-md' : 'bg-blue-100/90 text-[#005bb5]'
+                        }`}>
+                          Q
+                        </div>
+                        <div className="flex-1">
+                          <span className={`text-[15px] sm:text-[18px] md:text-[19px] font-extrabold leading-snug tracking-tight break-keep transition-colors duration-150 ${
+                            isOpen ? 'text-[#005bb5]' : 'text-slate-900 group-hover:text-blue-700'
+                          }`}>
+                            {qa.q}
+                          </span>
+                        </div>
+                      </div>
+                      <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 ${
+                        isOpen ? 'bg-blue-500 text-white rotate-180 shadow-sm' : 'bg-slate-100 text-slate-500 group-hover:bg-blue-100 group-hover:text-blue-700'
+                      }`}>
+                        <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
+                      </div>
+                    </button>
+
+                    {/* Collapsible Answer Body */}
+                    <motion.div
+                      initial={false}
+                      animate={{
+                        height: isOpen ? 'auto' : 0,
+                        opacity: isOpen ? 1 : 0
+                      }}
+                      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 pb-6 pt-1 sm:px-7 sm:pb-7 text-left">
+                        <div className="p-4 sm:p-6 rounded-2xl bg-gradient-to-r from-blue-50/70 to-slate-50 border border-blue-100/80 flex gap-3.5 sm:gap-4 items-start shadow-inner">
+                          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-900 text-white font-black text-xs sm:text-sm flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                            A
+                          </div>
+                          <div className="text-slate-800 text-[14px] sm:text-[16.5px] md:text-[17px] leading-relaxed font-semibold break-keep whitespace-pre-line flex-1">
+                            {qa.a}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                );
+              }))}
+          </div>
+
+          {/* Bottom Trust Badge */}
+          <div className="text-center mt-12 md:mt-16 p-6 sm:p-8 bg-gradient-to-r from-[#005bb5] via-[#005bb5] to-[#123454] text-white rounded-3xl max-w-2xl mx-auto shadow-xl shadow-blue-950/20 border border-blue-400/30 relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-center sm:text-left">
+              <p className="text-sm sm:text-base md:text-lg font-extrabold text-white leading-snug break-keep">
+                💡 찾으시는 답변이 없으신가요?
+              </p>
+              <p className="text-xs sm:text-sm text-blue-100 font-medium mt-1 break-keep">
+                언제든 문의해 주시면 친절하고 속 시원히 안내해 드리겠습니다.
+              </p>
+            </div>
+            <Link
+              to="/contact"
+              className="shrink-0 px-5 py-2.5 bg-white text-[#005bb5] hover:bg-blue-50 text-xs sm:text-sm font-black rounded-xl shadow-md transition-all flex items-center gap-1.5 transform hover:scale-105"
+            >
+              <span>무료 상담 신청</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+<section id="contact" className="py-24 bg-primary relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+          <motion.h2 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-[20px] sm:text-4xl md:text-5xl font-extrabold text-white mb-6 whitespace-nowrap"
+          >
+            소중한 기기, 다시 일상으로
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-white/90 mb-10 text-lg md:text-2xl font-medium break-keep"
+          >
+            기기 모델과 증상을 알려주세요. 필요한 수리부터 차근차근 살펴보겠습니다.
+          </motion.p>
+          <div className="flex flex-col sm:flex-row gap-5 justify-center">
+             <motion.a 
+               whileHover={{ scale: 1.04, y: -2 }}
+               whileTap={{ scale: 0.96 }}
+               href="#/contact" 
+               className="px-6 py-4 md:px-10 md:py-5 bg-white text-primaryDark text-[16px] md:text-xl font-extrabold rounded-xl hover:bg-slate-50 transition-all shadow-lg whitespace-nowrap"
+             >
+               전화 상담 수리 상담 준비
+             </motion.a>
+             <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.96 }}>
+               <Link to="/contact" className="block px-6 py-4 md:px-10 md:py-5 bg-primaryDark text-white text-[16px] md:text-xl font-extrabold rounded-xl hover:bg-[#0066cc] transition-all shadow-lg border border-white/20 whitespace-nowrap">
+                 온라인 견적 문의
+               </Link>
+             </motion.div>
+          </div>
+        </div>
+      </section>
+<section id="status" className="py-16 md:py-24 bg-surface relative"><div className="max-w-7xl mx-auto px-4 md:px-8"><div className="text-center mb-10 md:mb-16"><h2 className="text-[20px] sm:text-2xl md:text-4xl font-extrabold text-slate-900 mb-4 leading-tight break-keep">실시간 수리 현황</h2><p className="text-slate-500 text-sm md:text-base">접수와 완료 현황은 고객 정보를 가린 상태로 안내됩니다.</p></div><div className="rounded-3xl bg-white border border-slate-100/80 shadow-sm overflow-hidden"><table className="w-full text-left text-xs md:text-base"><thead className="bg-slate-50 text-slate-500"><tr><th scope="col" className="px-4 md:px-8 py-4 font-bold">상태</th><th scope="col" className="px-4 md:px-8 py-4 font-bold">고객</th><th scope="col" className="px-4 md:px-8 py-4 font-bold">기기</th><th scope="col" className="px-4 md:px-8 py-4 font-bold hidden sm:table-cell">접수일</th></tr></thead><tbody><tr><td colSpan={4} className="px-4 md:px-8 py-14 text-center"><Activity className="text-primary mx-auto mb-4" size={30}/><p className="font-extrabold text-slate-900 mb-2">수리 현황 공개 준비 중</p><p className="text-slate-500 text-xs md:text-sm">접수 현황은 준비되는 대로 이곳에 안내하겠습니다.</p></td></tr></tbody></table></div></div></section>
+{false && (<>
 <section id="process" className="py-20 md:py-28 bg-gradient-to-b from-blue-50/20 via-white to-blue-50/30 border-b border-slate-100/80 relative overflow-hidden">
         {/* Natural & Eco-friendly Decorative Background Elements */}
         <div className="absolute top-10 -left-16 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
@@ -658,318 +974,8 @@ const Home: React.FC = () => {
         </div>
       </section>
 <section id="devices" className="py-16 md:py-24 bg-surface relative"><div className="max-w-7xl mx-auto px-4 md:px-8"><div className="text-center mb-10 md:mb-16"><h2 className="text-[20px] sm:text-2xl md:text-4xl font-extrabold text-slate-900 mb-4 leading-tight break-keep">아이패드부터 아이폰까지, 기기에 맞춘 상담</h2><p className="text-slate-500 text-sm md:text-base">정확한 모델명과 증상을 기준으로 작업 가능 여부를 확인합니다.</p></div><div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">iPad</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">일반형 · mini · Air · Pro</p></motion.div><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">iPhone</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">화면 · 배터리 · 충전 · 전원</p></motion.div><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">MacBook</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">모델과 증상별 점검 상담</p></motion.div><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">기타 Apple 기기</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">기기 종류별 수리 가능 여부 문의</p></motion.div></div></div></section>
-<section id="b2b" className="py-16 md:py-24 bg-surface relative"><div className="max-w-7xl mx-auto px-4 md:px-8"><div className="text-center mb-10 md:mb-16"><h2 className="text-[20px] sm:text-2xl md:text-4xl font-extrabold text-slate-900 mb-4 leading-tight break-keep">기업 · 학교 · 기관의 기기도 함께</h2><p className="text-slate-500 text-sm md:text-base">여러 대의 기기는 모델, 수량, 증상과 희망 일정을 정리해주세요.</p></div><div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">기업 · 법인</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">업무용 기기 점검 상담</p></motion.div><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">학교 · 교육기관</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">학습용 기기 수리 상담</p></motion.div><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">다수 기기</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">기기별 증상과 수량 확인</p></motion.div><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">진행 일정</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">수리 범위와 소요 일정 협의</p></motion.div></div></div></section>
-<section id="services" className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-2 md:px-8 relative z-10">
-          <div className="text-center mb-10 md:mb-16">
-            <h3 className="text-2xl md:text-5xl font-extrabold text-slate-900 mb-3 sm:mb-4">전문적인 수리 솔루션</h3>
-            <p className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-bold text-xs sm:text-sm md:text-base shadow-sm hover:shadow-md transition-all">
-              <MousePointerClick className="w-4 h-4 sm:w-5 sm:h-5 text-primary animate-pulse" />
-              <span>아래 사진을 클릭하면 이동합니다</span>
-              <span className="inline-block animate-bounce text-base sm:text-lg">👇</span>
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-            {config.services.map((service, idx) => (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
-                whileHover={{ y: -6 }}
-                className="w-full h-full lg:max-w-[310px] lg:mx-auto"
-              >
-                <Link 
-                  to={`/services/${service.id}`}
-                  className="group relative overflow-hidden rounded-2xl bg-white border border-slate-200/80 shadow-md hover:shadow-2xl hover:border-primary/40 transition-all duration-300 flex flex-col h-full w-full"
-                >
-                  <div className="h-32 sm:h-48 lg:h-52 overflow-hidden relative">
-                    <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
-                  </div>
-                  <div className="p-4 sm:p-5 flex-1 flex items-center justify-center text-center">
-                    <h4 className="text-[17px] sm:text-[20px] md:text-[22px] lg:text-[23px] font-extrabold text-slate-900 group-hover:text-primary transition-colors break-keep">
-                      {service.title}
-                    </h4>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-<section id="reviews" className="py-16 md:py-24 bg-white relative border-t border-slate-100"><div className="max-w-7xl mx-auto px-4 md:px-8"><div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-10 md:mb-16"><h3 className="text-2xl md:text-5xl font-extrabold text-slate-900 tracking-tight">수리 이야기 · 이용후기</h3><p className="text-slate-500 mt-3 md:mt-5 leading-relaxed break-keep px-4">실제 수리 사례와 고객 후기는 준비되는 대로 안내하겠습니다.</p></div><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">{['액정 · 터치 점검','전원 · 충전 점검','침수 · 회로 진단'].map((t,i)=><motion.div key={t} whileHover={{y:-6}} className="group bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 hover:border-primary/40 hover:shadow-xl transition-all duration-300 flex flex-col h-full"><div className="relative aspect-video w-full overflow-hidden bg-slate-100"><img src={['/images/service-01-display.jpg','/images/service-04-port.jpg','/images/service-03-logic.jpg'][i]} alt={t+' 안내 이미지'} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/><span className="absolute top-3 left-3 bg-primary text-white text-xs font-black px-2 py-0.5 rounded">서비스 안내</span></div><div className="p-5"><h4 className="text-base md:text-lg font-bold text-slate-900 mb-2">{t}</h4><p className="text-slate-500 text-xs md:text-sm">모델과 증상에 따라 필요한 점검을 안내합니다.</p></div></motion.div>)}</div></div></section>
-<section id="locations" className="py-16 md:py-24 bg-surface relative"><div className="max-w-7xl mx-auto px-4 md:px-8"><div className="text-center mb-10 md:mb-16"><h2 className="text-[20px] sm:text-2xl md:text-4xl font-extrabold text-slate-900 mb-4 leading-tight break-keep">방문 · 접수 안내</h2><p className="text-slate-500 text-sm md:text-base">매장 주소와 연락처, 운영시간은 확정 후 안내됩니다.</p></div><div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">매장 위치</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">주소 안내 준비 중</p></motion.div><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">연락처</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">상담 채널 안내 준비 중</p></motion.div><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">운영시간</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">영업시간 안내 준비 중</p></motion.div><motion.div whileHover={{y:-6}} className="p-6 md:p-8 rounded-3xl bg-white border border-slate-100/80 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:border-blue-300 transition-all"><ShieldCheck className="text-primary mb-5" size={30}/><h3 className="text-base md:text-xl font-extrabold text-slate-900 mb-3">접수 전 준비</h3><p className="text-slate-600 text-xs md:text-sm leading-relaxed">모델명 · 증상 · 데이터 백업</p></motion.div></div></div></section>
-<section id="faq" className="py-20 md:py-28 bg-gradient-to-br from-[#f1f5fa] via-[#fafbfd] to-[#edf2f8] relative overflow-hidden border-b border-slate-100/80">
-        {/* Premium subtle dot pattern overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(#0071e3_0.8px,transparent_0.8px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] opacity-[0.06] pointer-events-none" />
-        
-        {/* Soft eco-inspired backdrop highlights */}
-        <div className="absolute top-1/4 right-[-10%] w-[600px] h-[600px] bg-blue-400/12 rounded-full blur-[150px] pointer-events-none" />
-        <div className="absolute bottom-1/4 left-[-10%] w-[600px] h-[600px] bg-sky-400/12 rounded-full blur-[150px] pointer-events-none" />
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-10 md:mb-14">
-            <h2 className="text-[18px] min-[360px]:text-[20px] min-[400px]:text-[22px] sm:text-[32px] md:text-[36.4px] font-black text-slate-900 mb-3.5 leading-tight tracking-tight whitespace-nowrap">
-              가장 많이 질문하시는 <span className="bg-gradient-to-r from-blue-600 via-sky-600 to-blue-500 bg-clip-text text-transparent underline decoration-blue-300 decoration-wavy underline-offset-8">안심 Q&A</span>
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base md:text-lg font-bold max-w-2xl mx-auto break-keep">
-              궁금한 점을 명쾌하게 해결해 드립니다.
-            </p>
-          </div>
-
-          {/* Mobile FAQ Dropdown Selector */}
-          <div className="block md:hidden relative mb-8 z-30">
-            <button
-              onClick={() => setFaqDropdownOpen(!faqDropdownOpen)}
-              className="w-full flex items-center justify-between bg-gradient-to-r from-blue-50 via-sky-50 to-blue-50/90 border-2 border-blue-500 rounded-2xl px-3.5 sm:px-5 py-3.5 text-sm font-extrabold text-slate-900 shadow-md shadow-blue-500/10 active:scale-[0.99] transition-all duration-200"
-            >
-              <span className="flex items-center gap-2 overflow-hidden">
-                <span className="relative flex h-3 w-3 shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-600"></span>
-                </span>
-                {activeFAQTab === 'all' ? (
-                  <span className="flex items-center gap-1.5 min-[380px]:gap-2 whitespace-nowrap overflow-hidden">
-                    <span className="bg-blue-600 text-white px-2.5 py-1 rounded-lg text-xs sm:text-sm font-black shadow-sm shrink-0">
-                      전체 보기
-                    </span>
-                    <span className="text-[11.5px] min-[360px]:text-xs min-[400px]:text-[13px] text-blue-950 font-extrabold tracking-tight whitespace-nowrap">
-                      (궁금하신 카테고리 선택)
-                    </span>
-                  </span>
-                ) : (
-                  <span className="bg-blue-600 text-white px-2.5 py-1 rounded-lg text-xs sm:text-sm font-black shadow-sm">
-                    {FAQ_DATA.find((cat) => cat.category === activeFAQTab)?.categoryName || ''}
-                  </span>
-                )}
-              </span>
-              <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm ml-1">
-                <ChevronDown
-                  className={`w-5 h-5 transition-transform duration-300 ${
-                    faqDropdownOpen ? 'rotate-180' : ''
-                  }`}
-                />
-              </div>
-            </button>
-
-            {faqDropdownOpen && (
-              <>
-                {/* Backdrop to close dropdown easily on clicking outside */}
-                <div
-                  className="fixed inset-0 z-20 cursor-default"
-                  onClick={() => setFaqDropdownOpen(false)}
-                />
-                <motion.div
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute left-0 right-0 mt-2 bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden z-30 py-1.5"
-                >
-                  <button
-                    onClick={() => {
-                      setActiveFAQTab('all');
-                      setOpenFAQIdx(null);
-                      setFaqDropdownOpen(false);
-                    }}
-                    className={`w-full text-left px-5 py-3.5 text-xs sm:text-sm font-bold transition-all duration-150 flex items-center justify-between ${
-                      activeFAQTab === 'all'
-                        ? 'bg-blue-50 text-[#005bb5] font-black'
-                        : 'text-slate-700 hover:bg-slate-50'
-                    }`}
-                  >
-                    <span>전체 보기</span>
-                    {activeFAQTab === 'all' && (
-                      <span className="w-2 h-2 rounded-full bg-blue-500" />
-                    )}
-                  </button>
-                  {FAQ_DATA.map((cat) => (
-                    <button
-                      key={cat.category}
-                      onClick={() => {
-                        setActiveFAQTab(cat.category);
-                        setOpenFAQIdx(null);
-                        setFaqDropdownOpen(false);
-                      }}
-                      className={`w-full text-left px-5 py-3.5 text-xs sm:text-sm font-bold transition-all duration-150 flex items-center justify-between ${
-                        activeFAQTab === cat.category
-                          ? 'bg-blue-50 text-[#005bb5] font-black'
-                          : 'text-slate-700 hover:bg-slate-50'
-                      }`}
-                    >
-                      <span>{cat.categoryName}</span>
-                      {activeFAQTab === cat.category && (
-                        <span className="w-2 h-2 rounded-full bg-blue-500" />
-                      )}
-                    </button>
-                  ))}
-                </motion.div>
-              </>
-            )}
-          </div>
-
-          {/* Desktop Category Navigation Bar (Single Line Segmented Control) */}
-          <div className="hidden md:flex items-center justify-center mb-10">
-            <div className="inline-flex items-center p-1.5 bg-slate-100/90 backdrop-blur-md border border-slate-200/90 rounded-full shadow-inner max-w-full overflow-x-auto scrollbar-none gap-1">
-              <button
-                onClick={() => {
-                  setActiveFAQTab('all');
-                  setOpenFAQIdx(null);
-                }}
-                className={`whitespace-nowrap flex-shrink-0 px-4 py-2.5 rounded-full text-xs lg:text-sm font-black transition-all duration-200 cursor-pointer ${
-                  activeFAQTab === 'all'
-                    ? 'bg-gradient-to-r from-[#005bb5] to-[#0071e3] text-white shadow-md shadow-blue-600/25 scale-[1.02]'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
-                }`}
-              >
-                전체 보기
-              </button>
-              {FAQ_DATA.map((cat) => (
-                <button
-                  key={cat.category}
-                  onClick={() => {
-                    setActiveFAQTab(cat.category);
-                    setOpenFAQIdx(null);
-                  }}
-                  className={`whitespace-nowrap flex-shrink-0 px-4 py-2.5 rounded-full text-xs lg:text-sm font-extrabold transition-all duration-200 cursor-pointer ${
-                    activeFAQTab === cat.category
-                      ? 'bg-gradient-to-r from-[#005bb5] to-[#0071e3] text-white shadow-md shadow-blue-600/25 font-black scale-[1.02]'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
-                  }`}
-                >
-                  {cat.categoryName}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Interactive FAQ Accordion List */}
-          <div className="space-y-4 max-w-3xl mx-auto">
-            {FAQ_DATA.filter(cat => activeFAQTab === 'all' || cat.category === activeFAQTab)
-              .flatMap((cat) => cat.qas.map((qa, index) => {
-                const uniqueKey = `${cat.category}-${index}`;
-                const isOpen = openFAQIdx === uniqueKey;
-
-                return (
-                  <div
-                    key={uniqueKey}
-                    className={`bg-white border rounded-2xl md:rounded-3xl transition-all duration-300 overflow-hidden ${
-                      isOpen
-                        ? 'border-blue-500 ring-2 ring-blue-500/20 shadow-xl shadow-blue-500/5'
-                        : 'border-slate-200/90 hover:border-blue-300 hover:shadow-md'
-                    }`}
-                  >
-                    {/* Header / Question Trigger */}
-                    <button
-                      onClick={() => setOpenFAQIdx(isOpen ? null : uniqueKey)}
-                      className="w-full text-left p-5 sm:p-6 md:p-7 flex items-center justify-between gap-4 cursor-pointer group"
-                    >
-                      <div className="flex gap-3 sm:gap-4 items-center flex-1">
-                        <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center shrink-0 font-black text-sm sm:text-base transition-colors ${
-                          isOpen ? 'bg-[#005bb5] text-white shadow-md' : 'bg-blue-100/90 text-[#005bb5]'
-                        }`}>
-                          Q
-                        </div>
-                        <div className="flex-1">
-                          <span className={`text-[15px] sm:text-[18px] md:text-[19px] font-extrabold leading-snug tracking-tight break-keep transition-colors duration-150 ${
-                            isOpen ? 'text-[#005bb5]' : 'text-slate-900 group-hover:text-blue-700'
-                          }`}>
-                            {qa.q}
-                          </span>
-                        </div>
-                      </div>
-                      <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 ${
-                        isOpen ? 'bg-blue-500 text-white rotate-180 shadow-sm' : 'bg-slate-100 text-slate-500 group-hover:bg-blue-100 group-hover:text-blue-700'
-                      }`}>
-                        <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
-                      </div>
-                    </button>
-
-                    {/* Collapsible Answer Body */}
-                    <motion.div
-                      initial={false}
-                      animate={{
-                        height: isOpen ? 'auto' : 0,
-                        opacity: isOpen ? 1 : 0
-                      }}
-                      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-5 pb-6 pt-1 sm:px-7 sm:pb-7 text-left">
-                        <div className="p-4 sm:p-6 rounded-2xl bg-gradient-to-r from-blue-50/70 to-slate-50 border border-blue-100/80 flex gap-3.5 sm:gap-4 items-start shadow-inner">
-                          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-900 text-white font-black text-xs sm:text-sm flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
-                            A
-                          </div>
-                          <div className="text-slate-800 text-[14px] sm:text-[16.5px] md:text-[17px] leading-relaxed font-semibold break-keep whitespace-pre-line flex-1">
-                            {qa.a}
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  </div>
-                );
-              }))}
-          </div>
-
-          {/* Bottom Trust Badge */}
-          <div className="text-center mt-12 md:mt-16 p-6 sm:p-8 bg-gradient-to-r from-[#005bb5] via-[#005bb5] to-[#123454] text-white rounded-3xl max-w-2xl mx-auto shadow-xl shadow-blue-950/20 border border-blue-400/30 relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="text-center sm:text-left">
-              <p className="text-sm sm:text-base md:text-lg font-extrabold text-white leading-snug break-keep">
-                💡 찾으시는 답변이 없으신가요?
-              </p>
-              <p className="text-xs sm:text-sm text-blue-100 font-medium mt-1 break-keep">
-                언제든 문의해 주시면 친절하고 속 시원히 안내해 드리겠습니다.
-              </p>
-            </div>
-            <Link
-              to="/contact"
-              className="shrink-0 px-5 py-2.5 bg-white text-[#005bb5] hover:bg-blue-50 text-xs sm:text-sm font-black rounded-xl shadow-md transition-all flex items-center gap-1.5 transform hover:scale-105"
-            >
-              <span>무료 상담 신청</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
-<section id="contact" className="py-24 bg-primary relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <motion.h2 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-[20px] sm:text-4xl md:text-5xl font-extrabold text-white mb-6 whitespace-nowrap"
-          >
-            소중한 기기, 다시 일상으로
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-white/90 mb-10 text-lg md:text-2xl font-medium break-keep"
-          >
-            기기 모델과 증상을 알려주세요. 필요한 수리부터 차근차근 살펴보겠습니다.
-          </motion.p>
-          <div className="flex flex-col sm:flex-row gap-5 justify-center">
-             <motion.a 
-               whileHover={{ scale: 1.04, y: -2 }}
-               whileTap={{ scale: 0.96 }}
-               href="#/contact" 
-               className="px-6 py-4 md:px-10 md:py-5 bg-white text-primaryDark text-[16px] md:text-xl font-extrabold rounded-xl hover:bg-slate-50 transition-all shadow-lg whitespace-nowrap"
-             >
-               전화 상담 수리 상담 준비
-             </motion.a>
-             <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.96 }}>
-               <Link to="/contact" className="block px-6 py-4 md:px-10 md:py-5 bg-primaryDark text-white text-[16px] md:text-xl font-extrabold rounded-xl hover:bg-[#0066cc] transition-all shadow-lg border border-white/20 whitespace-nowrap">
-                 온라인 견적 문의
-               </Link>
-             </motion.div>
-          </div>
-        </div>
-      </section>    </div>
+</>)}
+    </div>
   );
 };
 
