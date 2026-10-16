@@ -96,6 +96,16 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
+        {/* Footer links + customer center (reference structure) */}
+        <div className="border-t border-gray-800 pt-8 pb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+          <ul className="flex flex-wrap gap-x-5 gap-y-2 text-[11px] md:text-sm font-medium">
+            {[['홈','/'],['수리 서비스','/services'],['매장 안내','/locations'],['자주 묻는 질문','/faq'],['수리 상담','/contact']].map(([n,to])=><li key={n}><Link to={to} className="text-gray-400 hover:text-primary transition-colors">{n}</Link></li>)}
+          </ul>
+          <div className="md:text-right">
+            <h4 className="text-[12px] md:text-lg font-bold text-white mb-2 uppercase tracking-wider">고객센터</h4>
+            <p className="text-gray-400 text-[11px] md:text-sm font-medium">운영시간 안내 준비 중</p>
+          </div>
+        </div>
         {/* Bottom Copyright */}
         <div className="border-t border-gray-800 pt-8 text-center flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[10px] md:text-sm text-gray-500 font-medium">

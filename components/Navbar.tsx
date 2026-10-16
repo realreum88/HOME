@@ -28,6 +28,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm transition-all">
+<div className="hidden md:block border-b border-gray-100 bg-surface"><div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-9 flex items-center justify-end gap-5 text-[13px] font-medium text-textSub">{[['이용후기','/portfolio'],['자주 묻는 질문','/faq'],['수리현황','/status'],['수리 상담','/contact']].map(([n,to])=><Link key={n} to={to} className="hover:text-primary transition-colors">{n}</Link>)}</div></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-24 items-center">
           {/* Logo & Socials */}
