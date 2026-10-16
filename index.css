@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+section[id]{scroll-margin-top:110px} :focus-visible{outline:3px solid #005bb5;outline-offset:4px} @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* Cool neutral treatment keeps the original hero image and composition. */
+#top{background-color:#f5f7fa}#top img{filter:grayscale(1);opacity:.42}#top h1{color:#1d1d1f}#top h1>span:first-child{color:#515966}
